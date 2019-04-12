@@ -1,0 +1,23 @@
+version: '3.1'
+
+volumes:
+  grafana_data: {}
+
+networks:
+  front-tier:
+  back-tier:
+
+services:
+  postgres:
+    image: 'postgres:10.7'
+    environment:
+      POSTGRES_PASSWORD: grafana
+      POSTGRES_USER: grafana
+    ports:
+      - 5432:5432
+
+  grafana:
+    build: './grafana'
+    container_name: 'grafana'
+    ports:
+      - '3000:3000'
